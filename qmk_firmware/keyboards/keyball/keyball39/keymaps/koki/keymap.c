@@ -73,17 +73,17 @@ void oledkit_render_info_user(void) {
 const uint16_t PROGMEM test_combo1[] = {KC_U, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM test_combo2[] = {KC_Y, KC_P, COMBO_END};
 const uint16_t PROGMEM test_combo3[] = {KC_Q, KC_L, COMBO_END};
-//const uint16_t PROGMEM test_combo4[] = {KC_X, KC_C, COMBO_END};
-//const uint16_t PROGMEM test_combo5[] = {KC_M, KC_J, COMBO_END};
-const uint16_t PROGMEM test_combo4[] = {KC_O, KC_-, COMBO_END};
-const uint16_t PROGMEM test_combo5[] = {KC_K, KC_T, COMBO_END};
+const uint16_t PROGMEM test_combo4[] = {KC_X, KC_C, COMBO_END}; 
+const uint16_t PROGMEM test_combo5[] = {KC_M, KC_J, COMBO_END};
+const uint16_t PROGMEM test_combo6[] = {KC_O, KC_MINS, COMBO_END}; 
+const uint16_t PROGMEM test_combo7[] = {KC_K, KC_T, COMBO_END}; 
 
 combo_t key_combos[] = {
     COMBO(test_combo1, KC_TAB),
     COMBO(test_combo2, KC_DEL), 
     COMBO(test_combo3, KC_ESC), 
-    //COMBO(test_combo4, KC_INT5),
-    //COMBO(test_combo5, KC_INT4),
     COMBO(test_combo4, KC_INT5),
     COMBO(test_combo5, KC_INT4),
+    COMBO(test_combo6, KC_LNG2),
+    COMBO(test_combo7, KC_LNG1),
 };

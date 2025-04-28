@@ -86,6 +86,6 @@ combo_t key_combos[] = {
     COMBO(test_combo4, KC_ESC), 
     COMBO(test_combo5, KC_ENT),
     COMBO(test_combo6, KC_TAB),
-    COMBO(test_combo7, MS_BTN1),
-    COMBO(test_combo8, MS_BTN2),
+    COMBO(test_combo7, KC_BTN1),
+    COMBO(test_combo8, KC _BTN2),
 };

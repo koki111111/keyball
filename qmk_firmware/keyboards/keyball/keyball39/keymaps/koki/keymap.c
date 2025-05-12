@@ -21,116 +21,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 
-//カスタムキーコードを宣言
-enum custom_keycodes {
-    MT_T = SAFE_RANGE,
-    MT_N,
-    MT_S,
-    MT_O,
-};
 
-//MT_xの中身
-
-// 個別タイマー
-static uint16_t timer_T = 0;
-static bool mod_T_active = false;
-
-static uint16_t timer_N = 0;
-static bool mod_N_active = false;
-
-static uint16_t timer_S = 0;
-static bool mod_S_active = false;
-
-static uint16_t timer_O = 0;
-static bool mod_O_active = false;
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case MT_T:
-            if (record->event.pressed) {
-                timer_T = timer_read();
-                mod_T_active = false;
-            } else {
-                if (!mod_T_active && timer_elapsed(timer_T) < TAPPING_TERM) {
-                    register_code(KC_T);
-                    unregister_code(KC_T);
-                } else {
-                    unregister_mods(MOD_BIT(KC_LSFT));
-                }
-            }
-            // 長押し判定後すぐモディファイア登録
-            if (record->event.pressed && timer_elapsed(timer_T) >= TAPPING_TERM && !mod_T_active) {
-                register_mods(MOD_BIT(KC_LSFT));
-                mod_T_active = true;
-            }
-            return false;
-
-        case MT_N:
-            if (record->event.pressed) {
-                timer_N = timer_read();
-                mod_N_active = false;
-            } else {
-                if (!mod_N_active && timer_elapsed(timer_N) < TAPPING_TERM) {
-                    register_code(KC_N);
-                    unregister_code(KC_N);
-                } else {
-                    unregister_mods(MOD_BIT(KC_LCTL));
-                }
-            }
-            if (record->event.pressed && timer_elapsed(timer_N) >= TAPPING_TERM && !mod_N_active) {
-                register_mods(MOD_BIT(KC_LCTL));
-                mod_N_active = true;
-            }
-            return false;
-
-        case MT_S:
-            if (record->event.pressed) {
-                timer_S = timer_read();
-                mod_S_active = false;
-            } else {
-                if (!mod_S_active && timer_elapsed(timer_S) < TAPPING_TERM) {
-                    register_code(KC_S);
-                    unregister_code(KC_S);
-                } else {
-                    unregister_mods(MOD_BIT(KC_LALT));
-                }
-            }
-            if (record->event.pressed && timer_elapsed(timer_S) >= TAPPING_TERM && !mod_S_active) {
-                register_mods(MOD_BIT(KC_LALT));
-                mod_S_active = true;
-            }
-            return false;
-
-        case MT_O:
-            if (record->event.pressed) {
-                timer_O = timer_read();
-                mod_O_active = false;
-            } else {
-                if (!mod_O_active && timer_elapsed(timer_O) < TAPPING_TERM) {
-                    register_code(KC_O);
-                    unregister_code(KC_O);
-                } else {
-                    unregister_mods(MOD_BIT(KC_LSFT));
-                }
-            }
-            if (record->event.pressed && timer_elapsed(timer_O) >= TAPPING_TERM && !mod_O_active) {
-                register_mods(MOD_BIT(KC_LSFT));
-                mod_O_active = true;
-            }
-            return false;
-    }
-
-    return true;
-}
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
-    KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
-    KC_A     , KC_S     , KC_D     , MT_O     , KC_COMM     ,                            KC_K     , MT_T     , MT_N     , MT_S     , KC_H  ,
-    KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_LCTL  , KC_LGUI  , KC_LALT  ,LSFT_T(KC_LNG2),LT(1,KC_SPC),LT(3,KC_LNG1),KC_BSPC,LT(2,KC_ENT),LSFT_T(KC_LNG2),KC_RALT,KC_RGUI, KC_RSFT
+    KC_Q     , KC_L     , KC_U     , KC_DOT     , KC_QUESTION     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
+    LGUI_T(KC_E)     , LALT_T(KC_I)     , LCTL_T(KC_A)     , MT_O     , KC_COMM     ,                            KC_K     , MT_T     , MT_N     , MT_S     , LT(3,KC_H)  ,
+    LSFT_T(KC_Z)     , KC_X     , KC_C     , KC_V     , KC_AT     ,                            KC_G     , KC_D     , KC_M  , KC_J   , LGUI_T(KC_B)  ,
+    KC_LGUI  , KC_LALT  , KC_LCTL  ,LSFT_T(KC_TAB),LT(3,LCTL(M)),LCTL_T(KC_ENT),KC_BSPC,LT(1,KC_SPC),KC_1,KC_2,KC_3, KC_BTN1
   ),
 
   [1] = LAYOUT_universal(

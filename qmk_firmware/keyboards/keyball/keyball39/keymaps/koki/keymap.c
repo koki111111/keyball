@@ -25,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
-    KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
+    KC_A     , KC_S     , KC_D     , MT_O     , KC_COMM     ,                            KC_K     , MT_T     , MT_N     , MT_S     , KC_H  ,
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
     KC_LCTL  , KC_LGUI  , KC_LALT  ,LSFT_T(KC_LNG2),LT(1,KC_SPC),LT(3,KC_LNG1),KC_BSPC,LT(2,KC_ENT),LSFT_T(KC_LNG2),KC_RALT,KC_RGUI, KC_RSFT
   ),
@@ -72,18 +72,21 @@ void oledkit_render_info_user(void) {
 
 //以下コンボ追記箇所
 
-//const uint16_t PROGMEM test_combo1[] = {KC_X, KC_C, COMBO_END};
-//const uint16_t PROGMEM test_combo2[] = {KC_M, KC_J, COMBO_END}; 
+enum custom_keycodes {
+    MT_T = SAFE_RANGE,
+    MT_N,
+    MT_S,
+    MT_O,
+};
+
 const uint16_t PROGMEM test_combo3[] = {KC_Y, KC_P, COMBO_END};
 const uint16_t PROGMEM test_combo4[] = {KC_Q, KC_L, COMBO_END};
-const uint16_t PROGMEM test_combo5[] = {MT(MOD_LSFT, KC_T), MT(MOD_LCTL,KC_N), COMBO_END}; 
-const uint16_t PROGMEM test_combo6[] = {MT(MOD_LCTL,KC_N),MT(MOD_LALT,KC_S), COMBO_END}; 
-const uint16_t PROGMEM test_combo7[] = {MT(MOD_LSFT,KC_O), KC_COMMA, COMBO_END}; 
-const uint16_t PROGMEM test_combo8[] = {KC_K, MT(MOD_LSFT,KC_T), COMBO_END}; 
+const uint16_t PROGMEM test_combo5[] = {KC_T, KC_N, COMBO_END};
+const uint16_t PROGMEM test_combo6[] = {KC_N, KC_S, COMBO_END};
+const uint16_t PROGMEM test_combo7[] = {KC_O, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM test_combo8[] = {KC_K, KC_T, COMBO_END};
 
 combo_t key_combos[] = {
-    //COMBO(test_combo1, KC_LNG2),
-    //COMBO(test_combo2, KC_LNG1),
     COMBO(test_combo3, KC_DEL), 
     COMBO(test_combo4, KC_ESC), 
     COMBO(test_combo5, KC_BTN1),
@@ -91,3 +94,53 @@ combo_t key_combos[] = {
     COMBO(test_combo7, KC_LNG2),
     COMBO(test_combo8, KC_LNG1),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MT_T:
+            if (record->event.pressed) {
+                if (record->tap.count && !record->tap.interrupted) {
+                    tap_code(KC_T);
+                } else {
+                    register_mods(MOD_BIT(KC_LSFT));
+                }
+            } else {
+                unregister_mods(MOD_BIT(KC_LSFT));
+            }
+            return false;
+        case MT_N:
+            if (record->event.pressed) {
+                if (record->tap.count && !record->tap.interrupted) {
+                    tap_code(KC_N);
+                } else {
+                    register_mods(MOD_BIT(KC_LCTL));
+                }
+            } else {
+                unregister_mods(MOD_BIT(KC_LCTL));
+            }
+            return false;
+        case MT_S:
+            if (record->event.pressed) {
+                if (record->tap.count && !record->tap.interrupted) {
+                    tap_code(KC_S);
+                } else {
+                    register_mods(MOD_BIT(KC_LALT));
+                }
+            } else {
+                unregister_mods(MOD_BIT(KC_LALT));
+            }
+            return false;
+        case MT_O:
+            if (record->event.pressed) {
+                if (record->tap.count && !record->tap.interrupted) {
+                    tap_code(KC_O);
+                } else {
+                    register_mods(MOD_BIT(KC_LSFT));
+                }
+            } else {
+                unregister_mods(MOD_BIT(KC_LSFT));
+            }
+            return false;
+    }
+    return true;
+}

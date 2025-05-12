@@ -70,6 +70,8 @@ void oledkit_render_info_user(void) {
 }
 #endif
 
+//以下コンボ追記箇所
+
 const uint16_t PROGMEM test_combo1[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM test_combo2[] = {KC_M, KC_J, COMBO_END}; 
 const uint16_t PROGMEM test_combo3[] = {KC_Y, KC_P, COMBO_END};

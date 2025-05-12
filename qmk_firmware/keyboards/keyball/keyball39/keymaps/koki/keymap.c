@@ -20,11 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-// 個別タイマー変数を宣言
-static uint16_t timer_T = 0;
-static uint16_t timer_N = 0;
-static uint16_t timer_S = 0;
-static uint16_t timer_O = 0;
 
 //カスタムキーコードを宣言
 enum custom_keycodes {
@@ -36,65 +31,91 @@ enum custom_keycodes {
 
 //MT_xの中身
 
+// 個別タイマー
+static uint16_t timer_T = 0;
+static bool mod_T_active = false;
+
+static uint16_t timer_N = 0;
+static bool mod_N_active = false;
+
+static uint16_t timer_S = 0;
+static bool mod_S_active = false;
+
+static uint16_t timer_O = 0;
+static bool mod_O_active = false;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MT_T:
             if (record->event.pressed) {
                 timer_T = timer_read();
+                mod_T_active = false;
             } else {
-                if (timer_elapsed(timer_T) < TAPPING_TERM) {
-                    tap_code(KC_T);
+                if (!mod_T_active && timer_elapsed(timer_T) < TAPPING_TERM) {
+                    register_code(KC_T);
+                    unregister_code(KC_T);
                 } else {
                     unregister_mods(MOD_BIT(KC_LSFT));
                 }
             }
-            if (record->event.pressed && timer_elapsed(timer_T) >= TAPPING_TERM) {
+            // 長押し判定後すぐモディファイア登録
+            if (record->event.pressed && timer_elapsed(timer_T) >= TAPPING_TERM && !mod_T_active) {
                 register_mods(MOD_BIT(KC_LSFT));
+                mod_T_active = true;
             }
             return false;
 
         case MT_N:
             if (record->event.pressed) {
                 timer_N = timer_read();
+                mod_N_active = false;
             } else {
-                if (timer_elapsed(timer_N) < TAPPING_TERM) {
-                    tap_code(KC_N);
+                if (!mod_N_active && timer_elapsed(timer_N) < TAPPING_TERM) {
+                    register_code(KC_N);
+                    unregister_code(KC_N);
                 } else {
                     unregister_mods(MOD_BIT(KC_LCTL));
                 }
             }
-            if (record->event.pressed && timer_elapsed(timer_N) >= TAPPING_TERM) {
+            if (record->event.pressed && timer_elapsed(timer_N) >= TAPPING_TERM && !mod_N_active) {
                 register_mods(MOD_BIT(KC_LCTL));
+                mod_N_active = true;
             }
             return false;
 
         case MT_S:
             if (record->event.pressed) {
                 timer_S = timer_read();
+                mod_S_active = false;
             } else {
-                if (timer_elapsed(timer_S) < TAPPING_TERM) {
-                    tap_code(KC_S);
+                if (!mod_S_active && timer_elapsed(timer_S) < TAPPING_TERM) {
+                    register_code(KC_S);
+                    unregister_code(KC_S);
                 } else {
                     unregister_mods(MOD_BIT(KC_LALT));
                 }
             }
-            if (record->event.pressed && timer_elapsed(timer_S) >= TAPPING_TERM) {
+            if (record->event.pressed && timer_elapsed(timer_S) >= TAPPING_TERM && !mod_S_active) {
                 register_mods(MOD_BIT(KC_LALT));
+                mod_S_active = true;
             }
             return false;
 
         case MT_O:
             if (record->event.pressed) {
                 timer_O = timer_read();
+                mod_O_active = false;
             } else {
-                if (timer_elapsed(timer_O) < TAPPING_TERM) {
-                    tap_code(KC_O);
+                if (!mod_O_active && timer_elapsed(timer_O) < TAPPING_TERM) {
+                    register_code(KC_O);
+                    unregister_code(KC_O);
                 } else {
                     unregister_mods(MOD_BIT(KC_LSFT));
                 }
             }
-            if (record->event.pressed && timer_elapsed(timer_O) >= TAPPING_TERM) {
+            if (record->event.pressed && timer_elapsed(timer_O) >= TAPPING_TERM && !mod_O_active) {
                 register_mods(MOD_BIT(KC_LSFT));
+                mod_O_active = true;
             }
             return false;
     }

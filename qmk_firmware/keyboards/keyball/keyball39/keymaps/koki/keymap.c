@@ -20,6 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+// 個別タイマー変数を宣言
+static uint16_t timer_T = 0;
+static uint16_t timer_N = 0;
+static uint16_t timer_S = 0;
+static uint16_t timer_O = 0;
+
 //カスタムキーコードを宣言
 enum custom_keycodes {
     MT_T = SAFE_RANGE,
@@ -27,6 +33,74 @@ enum custom_keycodes {
     MT_S,
     MT_O,
 };
+
+//MT_xの中身
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MT_T:
+            if (record->event.pressed) {
+                timer_T = timer_read();
+            } else {
+                if (timer_elapsed(timer_T) < TAPPING_TERM) {
+                    tap_code(KC_T);
+                } else {
+                    unregister_mods(MOD_BIT(KC_LSFT));
+                }
+            }
+            if (record->event.pressed && timer_elapsed(timer_T) >= TAPPING_TERM) {
+                register_mods(MOD_BIT(KC_LSFT));
+            }
+            return false;
+
+        case MT_N:
+            if (record->event.pressed) {
+                timer_N = timer_read();
+            } else {
+                if (timer_elapsed(timer_N) < TAPPING_TERM) {
+                    tap_code(KC_N);
+                } else {
+                    unregister_mods(MOD_BIT(KC_LCTL));
+                }
+            }
+            if (record->event.pressed && timer_elapsed(timer_N) >= TAPPING_TERM) {
+                register_mods(MOD_BIT(KC_LCTL));
+            }
+            return false;
+
+        case MT_S:
+            if (record->event.pressed) {
+                timer_S = timer_read();
+            } else {
+                if (timer_elapsed(timer_S) < TAPPING_TERM) {
+                    tap_code(KC_S);
+                } else {
+                    unregister_mods(MOD_BIT(KC_LALT));
+                }
+            }
+            if (record->event.pressed && timer_elapsed(timer_S) >= TAPPING_TERM) {
+                register_mods(MOD_BIT(KC_LALT));
+            }
+            return false;
+
+        case MT_O:
+            if (record->event.pressed) {
+                timer_O = timer_read();
+            } else {
+                if (timer_elapsed(timer_O) < TAPPING_TERM) {
+                    tap_code(KC_O);
+                } else {
+                    unregister_mods(MOD_BIT(KC_LSFT));
+                }
+            }
+            if (record->event.pressed && timer_elapsed(timer_O) >= TAPPING_TERM) {
+                register_mods(MOD_BIT(KC_LSFT));
+            }
+            return false;
+    }
+
+    return true;
+}
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -98,52 +172,4 @@ combo_t key_combos[] = {
     COMBO(test_combo8, KC_LNG1),
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case MT_T:
-            if (record->event.pressed) {
-                if (record->tap.count && !record->tap.interrupted) {
-                    tap_code(KC_T);
-                } else {
-                    register_mods(MOD_BIT(KC_LSFT));
-                }
-            } else {
-                unregister_mods(MOD_BIT(KC_LSFT));
-            }
-            return false;
-        case MT_N:
-            if (record->event.pressed) {
-                if (record->tap.count && !record->tap.interrupted) {
-                    tap_code(KC_N);
-                } else {
-                    register_mods(MOD_BIT(KC_LCTL));
-                }
-            } else {
-                unregister_mods(MOD_BIT(KC_LCTL));
-            }
-            return false;
-        case MT_S:
-            if (record->event.pressed) {
-                if (record->tap.count && !record->tap.interrupted) {
-                    tap_code(KC_S);
-                } else {
-                    register_mods(MOD_BIT(KC_LALT));
-                }
-            } else {
-                unregister_mods(MOD_BIT(KC_LALT));
-            }
-            return false;
-        case MT_O:
-            if (record->event.pressed) {
-                if (record->tap.count && !record->tap.interrupted) {
-                    tap_code(KC_O);
-                } else {
-                    register_mods(MOD_BIT(KC_LSFT));
-                }
-            } else {
-                unregister_mods(MOD_BIT(KC_LSFT));
-            }
-            return false;
-    }
-    return true;
-}
+

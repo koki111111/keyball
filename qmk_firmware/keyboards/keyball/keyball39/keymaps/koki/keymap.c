@@ -20,6 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+//カスタムキーコードを宣言
+enum custom_keycodes {
+    MT_T = SAFE_RANGE,
+    MT_N,
+    MT_S,
+    MT_O,
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
@@ -72,12 +80,7 @@ void oledkit_render_info_user(void) {
 
 //以下コンボ追記箇所
 
-enum custom_keycodes {
-    MT_T = SAFE_RANGE,
-    MT_N,
-    MT_S,
-    MT_O,
-};
+
 
 const uint16_t PROGMEM test_combo3[] = {KC_Y, KC_P, COMBO_END};
 const uint16_t PROGMEM test_combo4[] = {KC_Q, KC_L, COMBO_END};

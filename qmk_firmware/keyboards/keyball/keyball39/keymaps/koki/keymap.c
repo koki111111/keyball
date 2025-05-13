@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_L     , KC_U     , KC_DOT     , KC_QUESTION     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
     KC_E     , KC_I     , KC_A     , KC_O     , KC_COMM     ,                            KC_K     , MT_T     , MT_N     , MT_S     , LT(3,KC_H)  ,
     LSFT_T(KC_Z)     , KC_X     , KC_C     , KC_V     , KC_AT     ,                            KC_G     , KC_D     , KC_M  , KC_J   , LGUI_T(KC_B)  ,
-    KC_LGUI  , KC_LALT  , KC_LCTL  ,LSFT_T(KC_TAB),LT(3,LCTL(M)),LCTL_T(KC_ENT),KC_BSPC,LT(1,KC_SPC),KC_1,KC_2,KC_3, KC_BTN1
+    KC_LGUI  , KC_LALT  , KC_LCTL  ,LSFT_T(KC_TAB),LT(3,LCTL(KC_M)),LCTL_T(KC_ENT),KC_BSPC,LT(1,KC_SPC),KC_1,KC_2,KC_3, KC_BTN1
   ),
 
   [1] = LAYOUT_universal(

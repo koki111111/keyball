@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
     KC_Q     , KC_L     , KC_U     , KC_DOT     , KC_QUESTION     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
-    LGUI_T(KC_E)     , LALT_T(KC_I)     , LCTL_T(KC_A)     , MT_O     , KC_COMM     ,                            KC_K     , MT_T     , MT_N     , MT_S     , LT(3,KC_H)  ,
+    KC_E     , KC_I     , KC_A     , KC_O     , KC_COMM     ,                            KC_K     , MT_T     , MT_N     , MT_S     , LT(3,KC_H)  ,
     LSFT_T(KC_Z)     , KC_X     , KC_C     , KC_V     , KC_AT     ,                            KC_G     , KC_D     , KC_M  , KC_J   , LGUI_T(KC_B)  ,
     KC_LGUI  , KC_LALT  , KC_LCTL  ,LSFT_T(KC_TAB),LT(3,LCTL(M)),LCTL_T(KC_ENT),KC_BSPC,LT(1,KC_SPC),KC_1,KC_2,KC_3, KC_BTN1
   ),
@@ -77,20 +77,20 @@ void oledkit_render_info_user(void) {
 
 
 
-const uint16_t PROGMEM test_combo3[] = {KC_Y, KC_P, COMBO_END};
-const uint16_t PROGMEM test_combo4[] = {KC_Q, KC_L, COMBO_END};
-const uint16_t PROGMEM test_combo5[] = {KC_T, KC_N, COMBO_END};
-const uint16_t PROGMEM test_combo6[] = {KC_N, KC_S, COMBO_END};
-const uint16_t PROGMEM test_combo7[] = {KC_O, KC_COMMA, COMBO_END};
-const uint16_t PROGMEM test_combo8[] = {KC_K, KC_T, COMBO_END};
+const uint16_t PROGMEM test_combo1[] = {KC_Y, KC_P, COMBO_END};
+const uint16_t PROGMEM test_combo2[] = {KC_Q, KC_L, COMBO_END};
+const uint16_t PROGMEM test_combo3[] = {LSHT_T(KC_T), LCTL_T(KC_N), COMBO_END};
+const uint16_t PROGMEM test_combo4[] = {LCTL_T(KC_N), LALT_T(KC_S), COMBO_END};
+const uint16_t PROGMEM test_combo5[] = {LSHT_T(KC_O), KC_COMMA, COMBO_END};
+const uint16_t PROGMEM test_combo6[] = {KC_K, LSHT_T(KC_T), COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(test_combo3, KC_DEL), 
-    COMBO(test_combo4, KC_ESC), 
-    COMBO(test_combo5, KC_BTN1),
-    COMBO(test_combo6, KC_BTN2),
-    COMBO(test_combo7, KC_LNG2),
-    COMBO(test_combo8, KC_LNG1),
+    COMBO(test_combo1, KC_DEL), 
+    COMBO(test_combo2, KC_ESC), 
+    COMBO(test_combo3, KC_BTN1),
+    COMBO(test_combo4, KC_BTN2),
+    COMBO(test_combo5, KC_LNG2),
+    COMBO(test_combo6, KC_LNG1),
 };
 
 

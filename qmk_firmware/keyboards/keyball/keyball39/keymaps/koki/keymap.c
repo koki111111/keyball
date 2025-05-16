@@ -21,6 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 
+#define MT_O MT(MOD_LSFT, KC_O)  // タップで 'O'、ホールドで Shift
+
 
 
 // clang-format off
@@ -74,7 +76,6 @@ void oledkit_render_info_user(void) {
 #endif
 
 
-#define MT_O MT(MOD_LSFT, KC_O)  // タップで 'O'、ホールドで Shift
 
 //以下コンボ追記箇所
 

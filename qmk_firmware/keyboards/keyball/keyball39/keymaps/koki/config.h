@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 //スリープしても電源オフにならない設定(片方のみ）
-#define WAIT_FOR_ULB
+//#define WAIT_FOR_ULB
 
 #ifdef RGBLIGHT_ENABLE
 //#    define RGBLIGHT_EFFECT_BREATHING

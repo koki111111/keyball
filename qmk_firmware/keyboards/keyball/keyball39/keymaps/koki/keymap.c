@@ -20,8 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-
+//MODTAPキーの定義
 #define MT_O MT(MOD_LSFT, KC_O)  // タップで 'O'、ホールドで Shift
+#define MT_T MT(MOD_LSFT, KC_T)  // タップで 'O'、ホールドで Shift
+#define MT_N MT(MOD_LCTL, KC_N)  // タップで 'O'、ホールドで Shift
+#define MT_S MT(MOD_LALT, KC_S)  // タップで 'O'、ホールドで Shift
+#define MT_H MT(MOD_LGUI, KC_H)  // タップで 'O'、ホールドで Shift
 
 
 
@@ -81,10 +85,10 @@ void oledkit_render_info_user(void) {
 
 const uint16_t PROGMEM test_combo1[] = {KC_Y, KC_P, COMBO_END};
 const uint16_t PROGMEM test_combo2[] = {KC_Q, KC_L, COMBO_END};
-const uint16_t PROGMEM test_combo3[] = {KC_T, KC_N, COMBO_END};
-const uint16_t PROGMEM test_combo4[] = {KC_N, KC_S, COMBO_END};
+const uint16_t PROGMEM test_combo3[] = {MT_T, MT_N, COMBO_END};
+const uint16_t PROGMEM test_combo4[] = {MT_N, MT_S, COMBO_END};
 const uint16_t PROGMEM test_combo5[] = {MT_O, KC_COMMA, COMBO_END};
-const uint16_t PROGMEM test_combo6[] = {KC_K, KC_T, COMBO_END};
+const uint16_t PROGMEM test_combo6[] = {KC_K, MT_T, COMBO_END};
 const uint16_t PROGMEM test_combo7[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM test_combo8[] = {KC_M, KC_J, COMBO_END};
 

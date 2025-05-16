@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 
-//keymap.cで比較するため明示的に宣言
-#define TAPPING_TERM 200
+//スリープしても電源オフにならない設定(片方のみ）
+#define WAIT_FOR_ULB
 
 #ifdef RGBLIGHT_ENABLE
 //#    define RGBLIGHT_EFFECT_BREATHING

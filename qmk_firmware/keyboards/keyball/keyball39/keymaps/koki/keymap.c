@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
     KC_Q     , KC_L     , KC_U     , KC_DOT     , KC_QUESTION     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
-    KC_E     , KC_I     , KC_A     , KC_O     , KC_COMM     ,                            KC_K     , KC_T     , KC_N     , KC_S     , LT(3,KC_H)  ,
+    KC_E     , KC_I     , KC_A     , MT_O     , KC_COMM     ,                            KC_K     , KC_T     , KC_N     , KC_S     , LT(3,KC_H)  ,
     LSFT_T(KC_Z)     , KC_X     , KC_C     , KC_V     , KC_AT     ,                            KC_G     , KC_D     , KC_M  , KC_J   , LGUI_T(KC_B)  ,
     KC_LGUI  , KC_LALT  , KC_LCTL  ,LSFT_T(KC_TAB),LT(3,LCTL(KC_M)),LCTL_T(KC_ENT),KC_BSPC,LT(1,KC_SPC),KC_1,KC_2,KC_3, KC_BTN1
   ),
@@ -73,13 +73,16 @@ void oledkit_render_info_user(void) {
 }
 #endif
 
+
+#define MT_O MT(MOD_LSFT, KC_O)  // タップで 'O'、ホールドで Shift
+
 //以下コンボ追記箇所
 
 const uint16_t PROGMEM test_combo1[] = {KC_Y, KC_P, COMBO_END};
 const uint16_t PROGMEM test_combo2[] = {KC_Q, KC_L, COMBO_END};
 const uint16_t PROGMEM test_combo3[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM test_combo4[] = {KC_N, KC_S, COMBO_END};
-const uint16_t PROGMEM test_combo5[] = {KC_O, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM test_combo5[] = {MT_O, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM test_combo6[] = {KC_K, KC_T, COMBO_END};
 const uint16_t PROGMEM test_combo7[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM test_combo8[] = {KC_M, KC_J, COMBO_END};

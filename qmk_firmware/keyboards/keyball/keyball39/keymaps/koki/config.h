@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 
-#define COMBO_TERM 50
+#define COMBO_TERM 40
 
 
 //スリープしても電源オフにならない設定(片方のみ）
